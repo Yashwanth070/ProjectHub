@@ -12,6 +12,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -101,10 +103,10 @@ const Login = () => {
       <div className="auth-divider">or continue with</div>
       
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-        <button className="btn btn-oauth" onClick={() => window.location.href = 'http://localhost:5001/api/auth/google'}>
+        <button className="btn btn-oauth" onClick={() => window.location.href = `${API_URL}/auth/google`}>
           <FaGoogle /> Google
         </button>
-        <button className="btn btn-oauth" onClick={() => window.location.href = 'http://localhost:5001/api/auth/github'}>
+        <button className="btn btn-oauth" onClick={() => window.location.href = `${API_URL}/auth/github`}>
           <FaGithub /> GitHub
         </button>
       </div>
