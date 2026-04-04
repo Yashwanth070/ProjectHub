@@ -46,3 +46,13 @@ cd frontend
 npm install
 npm run dev
 ```
+
+---
+
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+<div align="center">
+  <br />
+  <p>Engineered with precision by <b>Yashwanth</b>.</p>
+</div>
