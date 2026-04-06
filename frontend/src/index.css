@@ -268,8 +268,8 @@ p { color: var(--text-secondary); font-weight: 300; }
 .mockup-auth-layout { min-height: 100vh; display: flex; flex-direction: column; background: #FBFCFE; position: relative; font-family: 'Inter', sans-serif; overflow-x: hidden;}
 .mockup-auth-layout[data-theme='dark'] { background: #000; color: #fff;}
 .mockup-auth-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 6%; width: 100%; }
-.mockup-nav-left { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #1a1a1a; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-.mockup-auth-layout[data-theme='dark'] .mockup-nav-left { color: #fff; }
+.mockup-nav-left { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: var(--text-primary); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+[data-theme='dark'] .mockup-nav-left { color: #ffffff; }
 .mockup-nav-right { display: flex; gap: 32px; align-items: center; font-size: 0.9rem; font-weight: 600; color: #6b6e73; }
 .mockup-nav-link { color: inherit; text-decoration: none; transition: color 0.2s; cursor: pointer; }
 .mockup-nav-link:hover { color: #1a1a1a; }
