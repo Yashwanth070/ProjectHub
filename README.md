@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="frontend/public/logo.png" alt="ProjectHub Logo" width="120" />
+
   <h1>ProjectHub</h1>
   <p><strong>A Premium Project Submission & Peer-Review Portal</strong></p>
 </div>
