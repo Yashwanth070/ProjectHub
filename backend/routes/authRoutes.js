@@ -50,7 +50,10 @@ const handleOAuthSuccess = (user, res) => {
     department: user.department,
     avatar: user.avatar
   });
-  res.redirect(`http://localhost:5173/oauth/callback?token=${token}&user=${encodeURIComponent(userStr)}`);
+  
+  // Use FRONTEND_URL from environment for production, fallback to localhost for local dev
+  const targetUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+  res.redirect(`${targetUrl}/oauth/callback?token=${token}&user=${encodeURIComponent(userStr)}`);
 };
 
 // Google OAuth
