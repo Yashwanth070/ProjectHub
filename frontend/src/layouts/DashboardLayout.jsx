@@ -80,17 +80,8 @@ const DashboardLayout = () => {
 
       {/* Sidebar */}
       <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="sidebar-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/dashboard')}>
-          <div className="mockup-icon-wrapper" style={{ width: 32, height: 32, marginBottom: 0, borderRadius: 8, fontSize: '1rem', marginRight: 12 }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 3v4"></path>
-              <path d="M12 7l-4 14"></path>
-              <path d="M12 7l4 14"></path>
-              <path d="M9 13h6"></path>
-              <path d="M12 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-            </svg>
-          </div>
-          <span className="sidebar-logo-text">ProjectHub</span>
+        <div className="sidebar-header" style={{ cursor: 'pointer', paddingBottom: '24px' }} onClick={() => navigate('/dashboard')}>
+          <span className="mockup-nav-left" style={{ fontSize: '1.6rem', margin: 0, padding: 0 }}>ProjectHub</span>
         </div>
 
         <nav className="sidebar-nav">
