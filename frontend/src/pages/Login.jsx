@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FaGoogle, FaGithub } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 import toast from 'react-hot-toast';
 
 const Login = () => {
@@ -91,7 +92,7 @@ const Login = () => {
 
       <div className="mockup-oauth-grid">
         <a href={`${API_URL}/auth/google`} className="mockup-oauth-btn">
-          <FaGoogle style={{ color: '#DB4437' }} /> Google
+          <FcGoogle /> Google
         </a>
         <a href={`${API_URL}/auth/github`} className="mockup-oauth-btn">
           <FaGithub style={{ color: '#181717' }} /> GitHub
