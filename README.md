@@ -1,7 +1,7 @@
 <div align="center">
 
   <h1>ProjectHub</h1>
-  <p><strong>A Premium Project Submission & Peer-Review Portal</strong></p>
+  <p><strong>A Project Submission & Peer-Review Portal</strong></p>
 </div>
 
 ---
