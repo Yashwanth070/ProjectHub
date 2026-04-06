@@ -40,7 +40,7 @@ router.get('/oauth/status', (req, res) => {
 });
 
 // Helper to handle OAuth Success
-const handleOAuthSuccess = (user, res) => {
+const handleOAuthSuccess = (user, res, req) => {
   const token = generateToken(user._id);
   const userStr = JSON.stringify({
     id: user._id,
@@ -51,42 +51,62 @@ const handleOAuthSuccess = (user, res) => {
     avatar: user.avatar
   });
   
-  // Use FRONTEND_URL from environment for production, fallback to localhost for local dev
-  const targetUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+  let targetUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+  if (req && req.query.state) {
+    try {
+      const stateObj = JSON.parse(Buffer.from(req.query.state, 'base64').toString('ascii'));
+      if (stateObj.redirect) targetUrl = stateObj.redirect;
+    } catch(e) {}
+  } else if (req && req.query.redirect) {
+    targetUrl = req.query.redirect;
+  }
+  
   res.redirect(`${targetUrl}/oauth/callback?token=${token}&user=${encodeURIComponent(userStr)}`);
 };
 
 // Google OAuth
 if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
-  router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+  router.get('/google', (req, res, next) => {
+    const state = req.query.redirect ? Buffer.from(JSON.stringify({ redirect: req.query.redirect })).toString('base64') : undefined;
+    passport.authenticate('google', { scope: ['profile', 'email'], state })(req, res, next);
+  });
   router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/login?error=google_failed', session: false }),
-    (req, res) => handleOAuthSuccess(req.user, res)
+    (req, res) => handleOAuthSuccess(req.user, res, req)
   );
 } else {
   // Mock Google OAuth
-  router.get('/google', (req, res) => res.redirect('/api/auth/google/callback'));
+  router.get('/google', (req, res) => {
+    const redirect = req.query.redirect ? `?redirect=${encodeURIComponent(req.query.redirect)}` : '';
+    res.redirect(`/api/auth/google/callback${redirect}`);
+  });
   router.get('/google/callback', async (req, res) => {
     const User = require('../models/User');
     const user = await User.findOne({ email: 'alex@portal.com' }); // Mock default student
-    handleOAuthSuccess(user, res);
+    handleOAuthSuccess(user, res, req);
   });
 }
 
 // GitHub OAuth
 if (process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET) {
-  router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
+  router.get('/github', (req, res, next) => {
+    const state = req.query.redirect ? Buffer.from(JSON.stringify({ redirect: req.query.redirect })).toString('base64') : undefined;
+    passport.authenticate('github', { scope: ['user:email'], state })(req, res, next);
+  });
   router.get('/github/callback',
     passport.authenticate('github', { failureRedirect: '/login?error=github_failed', session: false }),
-    (req, res) => handleOAuthSuccess(req.user, res)
+    (req, res) => handleOAuthSuccess(req.user, res, req)
   );
 } else {
   // Mock GitHub OAuth
-  router.get('/github', (req, res) => res.redirect('/api/auth/github/callback'));
+  router.get('/github', (req, res) => {
+    const redirect = req.query.redirect ? `?redirect=${encodeURIComponent(req.query.redirect)}` : '';
+    res.redirect(`/api/auth/github/callback${redirect}`);
+  });
   router.get('/github/callback', async (req, res) => {
     const User = require('../models/User');
     const user = await User.findOne({ email: 'sarah@portal.com' }); // Mock default reviewer
-    handleOAuthSuccess(user, res);
+    handleOAuthSuccess(user, res, req);
   });
 }
 

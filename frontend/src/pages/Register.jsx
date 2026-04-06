@@ -159,10 +159,10 @@ const Register = () => {
       <div className="mockup-divider">or continue with</div>
 
       <div className="mockup-oauth-grid">
-        <a href={`${API_URL}/auth/google`} className="mockup-oauth-btn">
+        <a href={`${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin)}`} className="mockup-oauth-btn">
           <FcGoogle /> Google
         </a>
-        <a href={`${API_URL}/auth/github`} className="mockup-oauth-btn">
+        <a href={`${API_URL}/auth/github?redirect=${encodeURIComponent(window.location.origin)}`} className="mockup-oauth-btn">
           <FaGithub style={{ color: '#181717' }} /> GitHub
         </a>
       </div>
