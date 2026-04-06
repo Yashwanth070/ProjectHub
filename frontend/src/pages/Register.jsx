@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { HiOutlineMail, HiOutlineLockClosed, HiOutlineUser, HiOutlineEye, HiOutlineEyeOff, HiOutlineAcademicCap } from 'react-icons/hi';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
@@ -16,7 +15,6 @@ const Register = () => {
     role: 'student',
     department: ''
   });
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
@@ -55,147 +53,122 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-card">
-      <Link to="/" style={{ textDecoration: 'none' }}>
-        <div className="auth-logo">
-          <div className="auth-logo-icon" style={{ background: 'transparent' }}>
-            <img src="/logo.png" alt="ProjectHub Logo" />
-          </div>
-          <span className="auth-logo-text"></span>
-        </div>
-      </Link>
+    <div className="mockup-card">
+      <div className="mockup-icon-wrapper">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 3v4"></path>
+          <path d="M12 7l-4 14"></path>
+          <path d="M12 7l4 14"></path>
+          <path d="M9 13h6"></path>
+          <path d="M12 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+        </svg>
+      </div>
 
-      <h1 className="auth-title">Create Account</h1>
-      <p className="auth-subtitle">Join the project submission portal</p>
+      <h1 className="mockup-title">Create Account</h1>
+      <p className="mockup-subtitle">Join the project submission portal</p>
 
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className="form-label" htmlFor="reg-name">Full Name</label>
-          <div style={{ position: 'relative' }}>
-            <HiOutlineUser style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', fontSize: '1.1rem' }} />
-            <input
-              id="reg-name"
-              type="text"
-              name="name"
-              className="form-input"
-              placeholder="John Doe"
-              value={formData.name}
-              onChange={handleChange}
-              style={{ paddingLeft: '42px' }}
-            />
-          </div>
+      <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+        <div className="mockup-form-group">
+          <div className="mockup-label">FULL NAME</div>
+          <input
+            id="reg-name"
+            type="text"
+            name="name"
+            className="mockup-input"
+            placeholder="John Doe"
+            value={formData.name}
+            onChange={handleChange}
+          />
         </div>
 
-        <div className="form-group">
-          <label className="form-label" htmlFor="reg-email">Email Address</label>
-          <div style={{ position: 'relative' }}>
-            <HiOutlineMail style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', fontSize: '1.1rem' }} />
-            <input
-              id="reg-email"
-              type="email"
-              name="email"
-              className="form-input"
-              placeholder="you@example.com"
-              value={formData.email}
-              onChange={handleChange}
-              style={{ paddingLeft: '42px' }}
-            />
-          </div>
+        <div className="mockup-form-group">
+          <div className="mockup-label">EMAIL ADDRESS</div>
+          <input
+            id="reg-email"
+            type="email"
+            name="email"
+            className="mockup-input"
+            placeholder="name@company.com"
+            value={formData.email}
+            onChange={handleChange}
+          />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-          <div className="form-group">
-            <label className="form-label" htmlFor="reg-role">Role</label>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div className="mockup-form-group">
+            <div className="mockup-label">ROLE</div>
             <select
               id="reg-role"
               name="role"
-              className="form-select"
+              className="mockup-input"
               value={formData.role}
               onChange={handleChange}
+              style={{ appearance: 'none', backgroundPosition: 'right 16px center' }}
             >
               <option value="student">Student</option>
               <option value="reviewer">Reviewer</option>
             </select>
           </div>
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="reg-dept">Department</label>
-            <div style={{ position: 'relative' }}>
-              <HiOutlineAcademicCap style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', fontSize: '1.1rem' }} />
-              <input
-                id="reg-dept"
-                type="text"
-                name="department"
-                className="form-input"
-                placeholder="CS, ECE..."
-                value={formData.department}
-                onChange={handleChange}
-                style={{ paddingLeft: '42px' }}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="reg-password">Password</label>
-          <div style={{ position: 'relative' }}>
-            <HiOutlineLockClosed style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', fontSize: '1.1rem' }} />
+          <div className="mockup-form-group">
+            <div className="mockup-label">DEPARTMENT</div>
             <input
-              id="reg-password"
-              type={showPassword ? 'text' : 'password'}
-              name="password"
-              className="form-input"
-              placeholder="Min. 6 characters"
-              value={formData.password}
+              id="reg-dept"
+              type="text"
+              name="department"
+              className="mockup-input"
+              placeholder="CS, ECE..."
+              value={formData.department}
               onChange={handleChange}
-              style={{ paddingLeft: '42px', paddingRight: '42px' }}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '1.1rem' }}
-            >
-              {showPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
-            </button>
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="reg-confirm">Confirm Password</label>
-          <div style={{ position: 'relative' }}>
-            <HiOutlineLockClosed style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', fontSize: '1.1rem' }} />
-            <input
-              id="reg-confirm"
-              type="password"
-              name="confirmPassword"
-              className="form-input"
-              placeholder="Repeat password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              style={{ paddingLeft: '42px' }}
             />
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%', marginTop: '8px' }} disabled={loading}>
-          {loading ? <span className="loader loader-sm" /> : 'Create Account'}
+        <div className="mockup-form-group">
+          <div className="mockup-label">PASSWORD</div>
+          <input
+            id="reg-password"
+            type="password"
+            name="password"
+            className="mockup-input"
+            placeholder="Min. 6 characters"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="mockup-form-group">
+          <div className="mockup-label">CONFIRM PASSWORD</div>
+          <input
+            id="reg-confirm"
+            type="password"
+            name="confirmPassword"
+            className="mockup-input"
+            placeholder="Repeat password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button type="submit" className="mockup-btn-black" disabled={loading}>
+          {loading ? <span className="loader loader-sm" style={{ margin: 'auto', borderColor: 'transparent', borderTopColor: '#fff' }} /> : 'Create Account'}
         </button>
       </form>
 
-      <div className="auth-divider">or continue with</div>
-      
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-        <button className="btn btn-oauth" onClick={() => window.location.href = `${API_URL}/auth/google`}>
-          <FaGoogle /> Google
-        </button>
-        <button className="btn btn-oauth" onClick={() => window.location.href = `${API_URL}/auth/github`}>
-          <FaGithub /> GitHub
-        </button>
+      <div className="mockup-divider">or continue with</div>
+
+      <div className="mockup-oauth-grid">
+        <a href={`${API_URL}/auth/google`} className="mockup-oauth-btn">
+          <FaGoogle style={{ color: '#DB4437' }} /> Google
+        </a>
+        <a href={`${API_URL}/auth/github`} className="mockup-oauth-btn">
+          <FaGithub style={{ color: '#181717' }} /> GitHub
+        </a>
       </div>
 
-      <p className="auth-footer">
+      <div className="mockup-footer-text">
         Already have an account? <Link to="/login">Sign in</Link>
-      </p>
+      </div>
     </div>
   );
 };
