@@ -55,8 +55,13 @@ const SubmitProject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.title || !formData.description || !formData.category) {
+    if (!formData.title || !formData.description || !formData.category || !formData.abstract) {
       toast.error('Please fill in all required fields');
+      return;
+    }
+
+    if (!formData.githubUrl || !formData.liveUrl) {
+      toast.error('Please provide both GitHub Repository and Live Demo links');
       return;
     }
 
@@ -130,7 +135,7 @@ const SubmitProject = () => {
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="abstract">Abstract</label>
+            <label className="form-label" htmlFor="abstract">Abstract *</label>
             <input
               id="abstract"
               type="text"
@@ -139,6 +144,7 @@ const SubmitProject = () => {
               placeholder="Brief one-line summary of your project"
               value={formData.abstract}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -215,12 +221,12 @@ const SubmitProject = () => {
         <div className="card" style={{ marginBottom: '24px' }}>
           <h3 style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <HiOutlineLink style={{ color: 'var(--accent-gold)' }} />
-            Links
+            Links *
           </h3>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div className="form-group" style={{ marginBottom: 0 }}>
-              <label className="form-label" htmlFor="githubUrl">GitHub Repository</label>
+              <label className="form-label" htmlFor="githubUrl">GitHub Repository *</label>
               <input
                 id="githubUrl"
                 type="url"
@@ -229,10 +235,11 @@ const SubmitProject = () => {
                 placeholder="https://github.com/..."
                 value={formData.githubUrl}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group" style={{ marginBottom: 0 }}>
-              <label className="form-label" htmlFor="liveUrl">Live Demo URL</label>
+              <label className="form-label" htmlFor="liveUrl">Live Demo URL *</label>
               <input
                 id="liveUrl"
                 type="url"
@@ -241,6 +248,7 @@ const SubmitProject = () => {
                 placeholder="https://..."
                 value={formData.liveUrl}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
