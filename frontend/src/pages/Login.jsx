@@ -69,7 +69,7 @@ const Login = () => {
         <div className="mockup-form-group">
           <div className="mockup-label">
             <span>PASSWORD</span>
-            <Link to="#" style={{ color: '#171717', textTransform: 'none', fontWeight: 500, letterSpacing: 'normal', textDecoration: 'none' }}>Forgot?</Link>
+            <Link to="/forgot-password" style={{ color: '#171717', textTransform: 'none', fontWeight: 500, letterSpacing: 'normal', textDecoration: 'none' }}>Forgot?</Link>
           </div>
           <input
             id="password"

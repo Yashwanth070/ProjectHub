@@ -60,6 +60,11 @@ const SubmitProject = () => {
       return;
     }
 
+    if (files.length === 0) {
+      toast.error('Please upload at least one file before submitting');
+      return;
+    }
+
     setLoading(true);
     try {
       const data = new FormData();
@@ -244,7 +249,7 @@ const SubmitProject = () => {
         <div className="card" style={{ marginBottom: '24px' }}>
           <h3 style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <HiOutlineUpload style={{ color: 'var(--accent-gold)' }} />
-            Files
+            Files *
           </h3>
 
           <div

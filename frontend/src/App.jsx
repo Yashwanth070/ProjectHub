@@ -18,6 +18,7 @@ import Reviews from './pages/Reviews';
 import Profile from './pages/Profile';
 import AdminPanel from './pages/AdminPanel';
 import OAuthCallback from './pages/OAuthCallback';
+import ForgotPassword from './pages/ForgotPassword';
 
 // Protected Route wrapper
 const ProtectedRoute = ({ children, roles }) => {
@@ -61,6 +62,7 @@ function AppRoutes() {
       <Route element={<GuestRoute><AuthLayout /></GuestRoute>}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
 
       {/* OAuth callback doesn't need layout, just process and redirect */}

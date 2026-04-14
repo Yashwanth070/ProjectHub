@@ -28,6 +28,43 @@ router.post('/login', [
 
 router.get('/me', protect, getMe);
 
+// @desc    Verify email exists (Forgot Password — Step 1)
+// @route   POST /api/auth/forgot-password
+router.post('/forgot-password', [
+  body('email').isEmail().withMessage('Please enter a valid email')
+], async (req, res) => {
+  try {
+    const User = require('../models/User');
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'No account found with that email address' });
+    }
+    res.json({ success: true, message: 'Email verified' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// @desc    Reset password (Forgot Password — Step 2)
+// @route   POST /api/auth/reset-password
+router.post('/reset-password', [
+  body('email').isEmail().withMessage('Please enter a valid email'),
+  body('newPassword').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
+], async (req, res) => {
+  try {
+    const User = require('../models/User');
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'No account found with that email address' });
+    }
+    user.password = req.body.newPassword;
+    await user.save(); // pre-save hook will hash the password
+    res.json({ success: true, message: 'Password reset successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 // OAuth status check — tells frontend which providers are available
 router.get('/oauth/status', (req, res) => {
   res.json({
